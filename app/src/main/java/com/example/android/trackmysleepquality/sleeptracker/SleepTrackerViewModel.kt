@@ -89,13 +89,20 @@ class SleepTrackerViewModel(
      *
      * This is private because we don't want to expose setting this value to the Fragment.
      */
-    private val _navigateToSleepQuality = MutableLiveData<SleepNight>()
+    private val _navigateToSleepDetail = MutableLiveData<Long>()
+    val navigateToSleepDetail
+        get() = _navigateToSleepDetail
 
-    /**
-     * If this is non-null, immediately navigate to [SleepQualityFragment] and call [doneNavigating]
-     */
-    val navigateToSleepQuality: LiveData<SleepNight>
-        get() = _navigateToSleepQuality
+    fun onSleepNightClicked(id: Long) {
+        _navigateToSleepDetail.value = id
+
+    }
+
+    fun onSleepDetailNavigated() {
+        _navigateToSleepDetail.value = null
+    }
+
+
 
     /**
      * Call this immediately after calling `show()` on a toast.
@@ -204,4 +211,5 @@ class SleepTrackerViewModel(
             _showSnackbarEvent.value = true
         }
     }
+
 }
